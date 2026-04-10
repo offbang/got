@@ -1,156 +1,266 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Link Consent</title>
-  <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; padding: 20px; max-width: 700px; margin: auto; }
-    button { padding: 10px 14px; margin: 8px 0; }
-    #status { margin-top: 12px; white-space: pre-wrap; }
-    video { max-width: 100%; }
-    img { max-width: 100%; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Athlete: Strength & Endurance Plan</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e67e22;
+            --bg-light: #f4f7f6;
+            --text-dark: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1rem auto 0;
+            color: #d1d8e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Grid for Workout Days */
+        .workout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+            border-top: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.4rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '🏋️‍♂️';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .focus-text {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 1rem;
+            display: block;
+        }
+
+        /* Running Section */
+        .running-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 4rem;
+        }
+
+        .running-section .section-title {
+            color: var(--white);
+            border-bottom-color: var(--accent);
+        }
+
+        .running-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-box h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--accent);
+        }
+
+        .stat-box p {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Environment & Philosophy Section */
+        .environment {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
 </head>
 <body>
-  <h1>Confirm & Share</h1>
-  <p>This page will ask for permission to access your location and camera. These are optional — choose what you want to share. After sharing, you'll be redirected to the original destination.</p>
 
-  <div id="ui">
-    <p id="message">Loading...</p>
+    <header>
+        <h1>Hybrid Athlete Protocol</h1>
+        <p>A structured weekly routine integrating dumbbell strength training and endurance running.</p>
+    </header>
 
-    <button id="get-loc">Share Location (optional)</button><br/>
-    <button id="open-camera">Take Photo (optional)</button><br/>
-    <button id="send-and-go">Send & Continue</button>
+    <div class="container">
+        
+        <div class="text-center">
+            <h2 class="section-title">Strength Training Split</h2>
+        </div>
 
-    <div id="preview"></div>
-    <div id="status"></div>
-  </div>
+        <div class="workout-grid">
+            <div class="card">
+                <h3>Monday: Chest, Triceps & Core</h3>
+                <ul>
+                    <li><strong>Dumbbell Floor Press:</strong> 4 sets of 10-12 reps</li>
+                    <li><strong>Overhead Tricep Extensions:</strong> 3 sets of 10-12 reps</li>
+                    <li><strong>Weighted Abdominal Crunches:</strong> 3 sets of 15 reps</li>
+                </ul>
+                <span class="focus-text">Focus: Controlled form, moderate intensity, and deep muscle contraction.</span>
+            </div>
 
-  <script>
-    const backendBase = 'https://YOUR_BACKEND_URL'; // <-- replace with your backend domain (Render/Railway)
-    // e.g. https://my-tg-shortener.onrender.com
+            <div class="card">
+                <h3>Wednesday: Legs, Shoulders & Calves</h3>
+                <ul>
+                    <li><strong>Goblet Squats:</strong> 4 sets of 10-12 reps</li>
+                    <li><strong>Dumbbell Overhead Shoulder Press:</strong> 4 sets of 10 reps</li>
+                    <li><strong>Weighted Calf Raises:</strong> 4 sets of 15-20 reps</li>
+                </ul>
+                <span class="focus-text">Focus: Balance, posture, and full range of motion.</span>
+            </div>
 
-    function qs(key){
-      const params = new URLSearchParams(window.location.search);
-      return params.get(key);
-    }
+            <div class="card">
+                <h3>Friday: Back, Biceps & Core</h3>
+                <ul>
+                    <li><strong>Dumbbell Rows:</strong> 4 sets of 8-10 reps (per side)</li>
+                    <li><strong>Bicep Curls:</strong> 3 sets of 10-12 reps</li>
+                    <li><strong>Weighted Abdominal Holds:</strong> 3 sets of 30-45 seconds</li>
+                </ul>
+                <span class="focus-text">Focus: Back engagement and arm isolation.</span>
+            </div>
+        </div>
 
-    const id = qs('id');
-    const messageEl = document.getElementById('message');
-    const statusEl = document.getElementById('status');
-    const previewEl = document.getElementById('preview');
+        <div class="running-section">
+            <div class="text-center">
+                <h2 class="section-title">Endurance Running Plan</h2>
+                <p>Three runs per week spaced between workout days (e.g., Tuesday, Thursday, Saturday) to ensure optimal endurance building and recovery balance.</p>
+            </div>
+            
+            <div class="running-stats">
+                <div class="stat-box">
+                    <h4>Run 1 (Recovery/Base)</h4>
+                    <p>10 km</p>
+                </div>
+                <div class="stat-box">
+                    <h4>Run 2 (Tempo/Pace)</h4>
+                    <p>10 km</p>
+                </div>
+                <div class="stat-box">
+                    <h4>Run 3 (Long Run)</h4>
+                    <p>15 km</p>
+                </div>
+            </div>
+        </div>
 
-    let originalUrl = null;
-    let locationData = null;
-    let photoBlob = null;
+        <div class="environment">
+            <h3>The Environment & Philosophy</h3>
+            <p><strong>Setting:</strong> Designed for a simple home or outdoor workout setting relying on minimal equipment (two dumbbells and bodyweight).</p>
+            <p><strong>Lighting & Vibe:</strong> Natural, realistic, and motivating. It emphasizes the raw effort and discipline of a true fitness lifestyle.</p>
+            <p><strong>Execution:</strong> The athlete maintains proper form at all times. Progression is gradual, and consistency is the ultimate metric for success.</p>
+        </div>
 
-    if (!id) {
-      messageEl.textContent = 'Missing id in query string.';
-      document.getElementById('ui').style.display = 'none';
-    } else {
-      // fetch original
-      fetch(`${backendBase}/api/original/${encodeURIComponent(id)}`)
-        .then(r => {
-          if (!r.ok) throw new Error('Link not found');
-          return r.json();
-        })
-        .then(data => {
-          originalUrl = data.url;
-          messageEl.textContent = `Ready to share. You will be redirected to: ${originalUrl}`;
-        })
-        .catch(err => {
-          messageEl.textContent = 'Invalid or expired link.';
-          console.error(err);
-          document.getElementById('ui').style.display = 'none';
-        });
-    }
+    </div>
 
-    document.getElementById('get-loc').addEventListener('click', () => {
-      if (!navigator.geolocation) {
-        alert('Geolocation not supported');
-        return;
-      }
-      statusEl.textContent = 'Requesting location...';
-      navigator.geolocation.getCurrentPosition(pos => {
-        locationData = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-        statusEl.textContent = `Location captured: ${locationData.lat}, ${locationData.lon}`;
-      }, err => {
-        statusEl.textContent = 'Location permission denied or error.';
-      }, { enableHighAccuracy: true, timeout: 10000 });
-    });
+    <footer>
+        <p>Stay Disciplined. Trust the Process.</p>
+    </footer>
 
-    // camera capture
-    document.getElementById('open-camera').addEventListener('click', async () => {
-      previewEl.innerHTML = '';
-      const video = document.createElement('video');
-      video.setAttribute('autoplay', true);
-      video.setAttribute('playsinline', true);
-      previewEl.appendChild(video);
-
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-
-        const snapBtn = document.createElement('button');
-        snapBtn.textContent = 'Capture Photo';
-        previewEl.appendChild(snapBtn);
-
-        snapBtn.addEventListener('click', async () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = video.videoWidth || 640;
-          canvas.height = video.videoHeight || 480;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          canvas.toBlob(blob => {
-            photoBlob = blob;
-            // show preview
-            const img = document.createElement('img');
-            img.src = URL.createObjectURL(blob);
-            previewEl.innerHTML = '';
-            previewEl.appendChild(img);
-            // stop stream
-            stream.getTracks().forEach(t => t.stop());
-          }, 'image/jpeg', 0.85);
-        });
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Camera permission denied or error.';
-      }
-    });
-
-    // send and redirect
-    document.getElementById('send-and-go').addEventListener('click', async () => {
-      if (!originalUrl) {
-        alert('Original URL not loaded.');
-        return;
-      }
-      statusEl.textContent = 'Sending data...';
-
-      const form = new FormData();
-      if (locationData) {
-        form.append('lat', locationData.lat);
-        form.append('lon', locationData.lon);
-      }
-      form.append('timestamp', new Date().toISOString());
-      if (photoBlob) form.append('photo', photoBlob, 'photo.jpg');
-
-      try {
-        const r = await fetch(`${backendBase}/api/report/${encodeURIComponent(id)}`, {
-          method: 'POST',
-          body: form
-        });
-        const json = await r.json();
-        statusEl.textContent = 'Sent. Redirecting...';
-        // redirect to original (either from backend response or from originalUrl variable)
-        const dest = (json && json.url) ? json.url : originalUrl;
-        window.location.href = dest;
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Failed to send report. Redirecting anyway...';
-        window.location.href = originalUrl;
-      }
-    });
-  </script>
 </body>
 </html>
