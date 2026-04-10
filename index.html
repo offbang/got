@@ -1,190 +1,242 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid Athlete Protocol | Elite</title>
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --card-bg: #161616;
-            --accent: #00f2ff;
-            --accent-dim: rgba(0, 242, 255, 0.1);
-            --text: #ffffff;
-            --text-dim: #888;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hybrid Athlete Protocol | Elite</title>
 
-        body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            line-height: 1.6;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        header {
-            height: 35vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid var(--accent);
-            text-align: center;
-        }
+<style>
+:root {
+    --bg: #0a0a0a;
+    --card-bg: #161616;
+    --accent: #00f2ff;
+    --text: #ffffff;
+    --text-dim: #9aa0a6;
+}
 
-        header h1 {
-            font-size: 2.8rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin: 0;
-            color: var(--accent);
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .container {
-            max-width: 1200px;
-            margin: -40px auto 50px;
-            padding: 0 20px;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
 
-        .workout-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
+header {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+        url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5');
+    background-size: cover;
+    border-bottom: 2px solid var(--accent);
+}
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
+header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 4px;
+    color: var(--accent);
+}
 
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
+header p {
+    margin-top: 10px;
+    color: var(--text-dim);
+}
 
-        .exercise-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #222;
-        }
+.container {
+    max-width: 1200px;
+    margin: -60px auto 50px;
+    padding: 0 20px;
+}
 
-        .content { padding: 20px; }
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--accent);
+}
 
-        .day-label {
-            color: var(--accent);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            font-weight: bold;
-        }
+.workout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
 
-        h3 { margin: 10px 0; font-size: 1.4rem; }
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+}
 
-        .exercise-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 15px;
-        }
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
 
-        .exercise-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #222;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.95rem;
-        }
+.exercise-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
 
-        .exercise-item:last-child { border: none; }
+.content { padding: 20px; }
 
-        .reps { color: var(--accent); font-weight: bold; }
+.day-label {
+    font-size: 0.75rem;
+    color: var(--accent);
+}
 
-        .running-bar {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 40px;
-            border: 1px solid var(--accent);
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
+h3 { margin: 10px 0; }
 
-        .run-stat h4 { margin: 0; color: var(--text-dim); text-transform: uppercase; font-size: 0.8rem; }
-        .run-stat p { font-size: 1.8rem; font-weight: bold; margin: 5px 0 0; }
+.exercise-list {
+    list-style: none;
+    margin-top: 10px;
+}
 
-        footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.8rem; }
-    </style>
+.exercise-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+}
+
+.reps { color: var(--accent); }
+
+.focus {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-style: italic;
+}
+
+.running-section {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--accent);
+    margin-bottom: 40px;
+}
+
+.running-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.stat h4 {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
+
+.stat p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.environment {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    border-left: 3px solid var(--accent);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-dim);
+}
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>THE PROTOCOL</h1>
-    <p>STRENGTH & ENDURANCE INTEGRATION</p>
+<h1>HYBRID ATHLETE</h1>
+<p>Strength × Endurance Protocol</p>
 </header>
 
 <div class="container">
-    <div class="workout-grid">
-        
-        <div class="card">
-            <img src="https://www.muscleandfitness.com/wp-content/uploads/2018/12/800-floor-press-1.jpg?quality=86&strip=all" class="exercise-img" alt="Floor Press">
-            <div class="content">
-                <span class="day-label">Monday</span>
-                <h3>Chest & Triceps</h3>
-                <ul class="exercise-list">
-                    <li class="exercise-item"><span>Dumbbell Floor Press</span> <span class="reps">4 x 12</span></li>
-                    <li class="exercise-item"><span>Overhead Extensions</span> <span class="reps">3 x 12</span></li>
-                    <li class="exercise-item"><span>Weighted Ab Crunches</span> <span class="reps">3 x 15</span></li>
-                </ul>
-            </div>
-        </div>
 
-        <div class="card">
-            <img src="https://www.muscleandfitness.com/wp-content/uploads/2017/02/goblet-squat-1.jpg?quality=86&strip=all" class="exercise-img" alt="Goblet Squat">
-            <div class="content">
-                <span class="day-label">Wednesday</span>
-                <h3>Legs & Shoulders</h3>
-                <ul class="exercise-list">
-                    <li class="exercise-item"><span>Goblet Squats</span> <span class="reps">4 x 12</span></li>
-                    <li class="exercise-item"><span>Overhead Press</span> <span class="reps">4 x 10</span></li>
-                    <li class="exercise-item"><span>Calf Raises</span> <span class="reps">4 x 20</span></li>
-                </ul>
-            </div>
-        </div>
+<h2 class="section-title">Strength Training</h2>
 
-        <div class="card">
-            <img src="https://www.muscleandfitness.com/wp-content/uploads/2018/06/800-dumbbell-row.jpg?quality=86&strip=all" class="exercise-img" alt="Dumbbell Row">
-            <div class="content">
-                <span class="day-label">Friday</span>
-                <h3>Back & Biceps</h3>
-                <ul class="exercise-list">
-                    <li class="exercise-item"><span>Dumbbell Rows</span> <span class="reps">4 x 10</span></li>
-                    <li class="exercise-item"><span>Bicep Curls</span> <span class="reps">3 x 12</span></li>
-                    <li class="exercise-item"><span>Weighted Leg Raises</span> <span class="reps">3 x 15</span></li>
-                </ul>
-            </div>
-        </div>
+<div class="workout-grid">
 
-    </div>
+<div class="card">
+<img src="https://www.muscleandfitness.com/wp-content/uploads/2018/12/800-floor-press-1.jpg" class="exercise-img">
+<div class="content">
+<span class="day-label">Monday</span>
+<h3>Chest & Triceps</h3>
+<ul class="exercise-list">
+<li class="exercise-item"><span>Floor Press</span><span class="reps">4×12</span></li>
+<li class="exercise-item"><span>Overhead Extensions</span><span class="reps">3×12</span></li>
+<li class="exercise-item"><span>Weighted Crunches</span><span class="reps">3×15</span></li>
+</ul>
+<p class="focus">Controlled reps and muscle contraction.</p>
+</div>
+</div>
 
-    <div class="running-bar">
-        <div class="run-stat"><h4>Interval</h4><p>10 KM</p></div>
-        <div class="run-stat"><h4>Tempo</h4><p>10 KM</p></div>
-        <div class="run-stat"><h4>Long Run</h4><p>15 KM</p></div>
-    </div>
+<div class="card">
+<img src="https://www.muscleandfitness.com/wp-content/uploads/2017/02/goblet-squat-1.jpg" class="exercise-img">
+<div class="content">
+<span class="day-label">Wednesday</span>
+<h3>Legs & Shoulders</h3>
+<ul class="exercise-list">
+<li class="exercise-item"><span>Goblet Squats</span><span class="reps">4×12</span></li>
+<li class="exercise-item"><span>Overhead Press</span><span class="reps">4×10</span></li>
+<li class="exercise-item"><span>Calf Raises</span><span class="reps">4×20</span></li>
+</ul>
+<p class="focus">Balance, posture, full range.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://www.muscleandfitness.com/wp-content/uploads/2018/06/800-dumbbell-row.jpg" class="exercise-img">
+<div class="content">
+<span class="day-label">Friday</span>
+<h3>Back & Biceps</h3>
+<ul class="exercise-list">
+<li class="exercise-item"><span>Dumbbell Rows</span><span class="reps">4×10</span></li>
+<li class="exercise-item"><span>Bicep Curls</span><span class="reps">3×12</span></li>
+<li class="exercise-item"><span>Leg Raises</span><span class="reps">3×15</span></li>
+</ul>
+<p class="focus">Back engagement and control.</p>
+</div>
+</div>
+
+</div>
+
+<div class="running-section">
+<h2 class="section-title">Running Plan</h2>
+<p style="text-align:center; color: var(--text-dim);">3 runs weekly for endurance and recovery balance.</p>
+
+<div class="running-stats">
+<div class="stat"><h4>Recovery</h4><p>10KM</p></div>
+<div class="stat"><h4>Tempo</h4><p>10KM</p></div>
+<div class="stat"><h4>Long Run</h4><p>15KM</p></div>
+</div>
+</div>
+
+<div class="environment">
+<h3>Philosophy</h3>
+<p>Minimal equipment. Maximum discipline. Progressive overload and consistency drive results.</p>
+</div>
+
 </div>
 
 <footer>
-    <p>PROTOCOL TRAINING 2026 | BUILT FOR RESULTS</p>
+<p>Stay Disciplined. Trust the Process.</p>
 </footer>
 
 </body>
 </html>
+
