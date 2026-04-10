@@ -3,208 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid Athlete Protocol | Dark Mode</title>
+    <title>Hybrid Athlete Protocol | Elite</title>
     <style>
         :root {
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
-            --accent: #bb86fc;
-            --accent-secondary: #03dac6;
-            --text-main: #e1e1e1;
-            --text-dim: #a0a0a0;
+            --bg: #0a0a0a;
+            --card-bg: #161616;
+            --accent: #00f2ff;
+            --accent-dim: rgba(0, 242, 255, 0.1);
+            --text: #ffffff;
+            --text-dim: #888;
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
-            padding: 0;
             line-height: 1.6;
         }
 
         header {
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(180deg, #1f1f1f 0%, #121212 100%);
-            border-bottom: 1px solid #333;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--accent);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: var(--accent);
+            font-size: 3rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
+            margin: 0;
+            text-shadow: 0 0 20px var(--accent);
         }
 
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            max-width: 1200px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
         }
 
         .workout-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            border: 1px solid #333;
-            transition: transform 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #222;
+            transition: 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
             border-color: var(--accent);
+            transform: translateY(-10px);
         }
 
-        .day-header {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--accent-secondary);
-            border-bottom: 1px solid #333;
-        }
-
-        .exercise-block {
-            padding: 20px;
-            border-bottom: 1px solid #2a2a2a;
-        }
-
-        .exercise-name {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .video-demo {
+        .card-img {
             width: 100%;
-            height: 200px;
-            background: #000;
-            border-radius: 8px;
+            height: 220px;
             object-fit: cover;
-            margin-bottom: 10px;
+            filter: grayscale(30%);
         }
 
-        .sets-reps {
-            color: var(--text-dim);
+        .content {
+            padding: 25px;
+        }
+
+        .day-label {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: bold;
             font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .exercise-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .exercise-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
             display: flex;
             justify-content: space-between;
         }
 
-        .running-section {
-            margin-top: 50px;
+        .exercise-item:last-child { border: none; }
+
+        .reps { color: var(--accent); font-weight: bold; }
+
+        .running-bar {
+            background: var(--accent-dim);
             padding: 40px;
-            background: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
-            border-radius: 12px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .run-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .run-box {
-            background: #252525;
-            padding: 20px;
-            border-radius: 8px;
+            border-radius: 15px;
+            margin-top: 50px;
+            border: 1px solid var(--accent);
+            display: flex;
+            justify-content: space-around;
             text-align: center;
         }
 
-        .run-box h4 { margin: 0; color: var(--accent-secondary); }
-        .run-box span { font-size: 1.8rem; font-weight: bold; color: #fff; }
+        .run-stat h4 { margin: 0; color: var(--text-dim); }
+        .run-stat p { font-size: 2rem; font-weight: bold; margin: 10px 0 0; }
+
+        footer { text-align: center; padding: 50px; color: var(--text-dim); }
 
         @media (max-width: 768px) {
-            .run-grid { grid-template-columns: 1fr; }
+            .running-bar { flex-direction: column; gap: 20px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>The Protocol</h1>
-    <p style="color: var(--text-dim)">Minimal Gear. Maximum Results.</p>
+    <h1>THE PROTOCOL</h1>
+    <p>STRENGTH & ENDURANCE INTEGRATION</p>
 </header>
 
 <div class="container">
     <div class="workout-grid">
         
         <div class="card">
-            <div class="day-header">Monday: Chest & Triceps</div>
-            <div class="exercise-block">
-                <span class="exercise-name">Dumbbell Floor Press</span>
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/12805788037688654765_0" class="video-demo" alt="Form Demo">
-                <div class="sets-reps"><span>4 Sets</span><span>10-12 Reps</span></div>
-            </div>
-            <div class="exercise-block">
-                <span class="exercise-name">Overhead Extensions</span>
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/10232206201700458290_0" class="video-demo" alt="Form Demo">
-                <div class="sets-reps"><span>3 Sets</span><span>12 Reps</span></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="day-header">Wednesday: Legs & Shoulders</div>
-            <div class="exercise-block">
-                <span class="exercise-name">Goblet Squats</span>
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/12536931371280928582_0" class="video-demo" alt="Form Demo">
-                <div class="sets-reps"><span>4 Sets</span><span>12 Reps</span></div>
-            </div>
-            <div class="exercise-block">
-                <span class="exercise-name">Overhead Press</span>
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/14173730109807274171_0" class="video-demo" alt="Form Demo">
-                <div class="sets-reps"><span>4 Sets</span><span>10 Reps</span></div>
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef03a94e78?q=80&w=2070&auto=format&fit=crop" class="card-img" alt="Chest">
+            <div class="content">
+                <span class="day-label">Monday</span>
+                <h3>Chest & Triceps</h3>
+                <ul class="exercise-list">
+                    <li class="exercise-item"><span>Dumbbell Floor Press</span> <span class="reps">4 x 12</span></li>
+                    <li class="exercise-item"><span>Overhead Extensions</span> <span class="reps">3 x 12</span></li>
+                    <li class="exercise-item"><span>Weighted Ab Crunches</span> <span class="reps">3 x 15</span></li>
+                </ul>
             </div>
         </div>
 
         <div class="card">
-            <div class="day-header">Friday: Back & Biceps</div>
-            <div class="exercise-block">
-                <span class="exercise-name">Dumbbell Rows</span>
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/7747243905214186651_0" class="video-demo" alt="Form Demo">
-                <div class="sets-reps"><span>4 Sets</span><span>8-10 Reps</span></div>
+            <img src="https://images.unsplash.com/photo-1534367507873-d2d7e249a3fe?q=80&w=2070&auto=format&fit=crop" class="card-img" alt="Legs">
+            <div class="content">
+                <span class="day-label">Wednesday</span>
+                <h3>Legs & Shoulders</h3>
+                <ul class="exercise-list">
+                    <li class="exercise-item"><span>Goblet Squats</span> <span class="reps">4 x 12</span></li>
+                    <li class="exercise-item"><span>Overhead Press</span> <span class="reps">4 x 10</span></li>
+                    <li class="exercise-item"><span>Calf Raises</span> <span class="reps">4 x 20</span></li>
+                </ul>
             </div>
-            <div class="exercise-block">
-                <span class="exercise-name">Bicep Curls</span>
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/14251187352863864789_0" class="video-demo" alt="Form Demo">
-                <div class="sets-reps"><span>3 Sets</span><span>12 Reps</span></div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=2070&auto=format&fit=crop" class="card-img" alt="Back">
+            <div class="content">
+                <span class="day-label">Friday</span>
+                <h3>Back & Biceps</h3>
+                <ul class="exercise-list">
+                    <li class="exercise-item"><span>Dumbbell Rows</span> <span class="reps">4 x 10</span></li>
+                    <li class="exercise-item"><span>Bicep Curls</span> <span class="reps">3 x 12</span></li>
+                    <li class="exercise-item"><span>Weighted Leg Raises</span> <span class="reps">3 x 15</span></li>
+                </ul>
             </div>
         </div>
 
     </div>
 
-    <div class="running-section">
-        <h2 style="margin-top:0">Weekly Running Schedule</h2>
-        <div class="run-grid">
-            <div class="run-box">
-                <h4>Run 1</h4>
-                <span>10 KM</span>
-            </div>
-            <div class="run-box">
-                <h4>Run 2</h4>
-                <span>10 KM</span>
-            </div>
-            <div class="run-box">
-                <h4>Run 3</h4>
-                <span>15 KM</span>
-            </div>
-        </div>
+    <div class="running-bar">
+        <div class="run-stat"><h4>Interval Run</h4><p>10 KM</p></div>
+        <div class="run-stat"><h4>Tempo Run</h4><p>10 KM</p></div>
+        <div class="run-stat"><h4>Long Run</h4><p>15 KM</p></div>
     </div>
 </div>
 
-<footer style="text-align: center; padding: 40px; color: var(--text-dim);">
-    <p>Focus on the squeeze. Control the weight.</p>
+<footer>
+    <p>© 2026 PROTOCOL TRAINING | NO EXCUSES</p>
 </footer>
 
 </body>
